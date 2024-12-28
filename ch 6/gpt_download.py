@@ -12,7 +12,7 @@ import json
 import numpy as np
 import tensorflow as tf
 from tqdm import tqdm
-
+import torch
 
 def download_and_load_gpt2(model_size, models_dir):
     # Validate model size
@@ -143,6 +143,13 @@ def load_gpt2_params_from_tf_ckpt(ckpt_path, settings):
     return params
 
 import numpy as np
+
+
+def assign(left, right):
+    if left.shape != right.shape:
+        raise ValueError(f"Shape mismatch. Left: {left.shape}, Right: {right.shape}")
+    return torch.nn.Parameter(torch.tensor(right))
+
 
 def load_weights_into_gpt(gpt, params):
     gpt.pos_emb.weight = assign(gpt.pos_emb.weight, params['wpe'])
