@@ -1,4 +1,4 @@
 *.pth
-*.png
+# *.png
 gpt2
 wandb
